@@ -29,7 +29,7 @@ const Register = () => {
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
      <form onSubmit={handleRegister}>
-        <h1 className="text-5xl font-bold">Register now!</h1>
+        <h1 className="text-3xl font-bold">Register now!</h1>
            <fieldset className="fieldset">
           <label className="label">Email</label>
           <input type="email" name="email" className="input" placeholder="Email" />
