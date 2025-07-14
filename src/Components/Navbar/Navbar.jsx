@@ -12,51 +12,54 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    logOutUser().then(() => console.log('Sign out user')).catch(console.error);
+    logOutUser()
+      .then(() => console.log('Sign out user'))
+      .catch(console.error);
   };
-
-  const navLinkStyle = ({ isActive }) =>
-    isActive ? 'text-teal-900 font-bold' : 'hover:text-teal-700';
-
-  const navItems = (
-    <>
-      <li>
-        <NavLink to="/" className={navLinkStyle}>
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/about" className={navLinkStyle}>
-          About Us
-        </NavLink>
-      </li>
-    </>
-  );
 
   return (
     <>
-      <div className="navbar  shadow-md px-4">
+      <div className="navbar bg-white shadow-md px-4 sticky top-0 left-0 w-full z-50">
         {/* Logo */}
         <div className="navbar-start">
           <NavLink to="/">
-            <img
-              className="h-10 w-auto"
-              src="https://ninetheme.com/themes/crisop/wp-content/uploads/2023/02/crisoplogo.png"
-              alt="Logo"
-            />
+           <h3 className='text-2xl font-bold text-teal-900'>CRISPO</h3>
           </NavLink>
         </div>
 
         {/* Desktop Menu */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-4">{navItems}</ul>
+          <ul className="menu menu-horizontal px-1 gap-4">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+              >
+                About Us
+              </NavLink>
+            </li>
+          </ul>
         </div>
 
-        {/* Navbar End: Buttons and Hamburger */}
-        <div className="navbar-end flex items-center space-x-2">
-          {/* Always Visible Buttons (even on mobile) */}
+        {/* Right Side */}
+        <div className="navbar-end flex items-center gap-2">
           {user ? (
-            <button onClick={handleLogout} className="btn btn-sm btn-warning text-white">
+            <button
+              onClick={handleLogout}
+              className="btn btn-sm btn-warning text-white"
+            >
               Log out
             </button>
           ) : (
@@ -76,11 +79,11 @@ const Navbar = () => {
             </>
           )}
 
-          {/* Hamburger Toggle - only shows nav items */}
+          {/* Hamburger Toggle */}
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white focus:outline-none"
+              className="text-teal-800 focus:outline-none"
             >
               <svg
                 className="w-6 h-6"
@@ -110,10 +113,33 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Nav Only (not login/register) */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-teal-800 text-white px-4 pb-4">
-          <ul className="menu space-y-2 pt-3">{navItems}</ul>
+        <div className="lg:hidden bg-white text-gray-800 shadow-md px-4 pt-16 pb-4">
+          <ul className="flex flex-col gap-4">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
+              </NavLink>
+            </li>
+          </ul>
         </div>
       )}
 
