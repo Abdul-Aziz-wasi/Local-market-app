@@ -66,7 +66,7 @@ const Register = ({ isOpen, onClose }) => {
 
           <button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition"
+            className="w-full bg-teal-800 hover:bg-teal-700 text-white py-2 rounded transition"
           >
             Register
           </button>
