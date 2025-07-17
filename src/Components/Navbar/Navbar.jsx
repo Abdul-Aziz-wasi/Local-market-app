@@ -23,7 +23,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-start">
           <NavLink to="/">
-           <h3 className='text-2xl font-bold text-teal-800'>CRISPO</h3>
+           <h3 className='text-2xl font-bold text-teal-700'>CRISPO</h3>
           </NavLink>
         </div>
 
