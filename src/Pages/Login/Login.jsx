@@ -8,7 +8,7 @@ const Login = ({ isOpen, onClose }) => {
 
   const handleGoogleLogin =()=>{
     loginWithGoogle()
-    .thne(result=>{
+    .then(result=>{
       console.log(result)
     })
     .catch(error=>{

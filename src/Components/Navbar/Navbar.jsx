@@ -23,7 +23,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-start">
           <NavLink to="/">
-           <h3 className='text-2xl font-bold text-teal-900'>CRISPO</h3>
+           <h3 className='text-2xl font-bold text-teal-800'>CRISPO</h3>
           </NavLink>
         </div>
 
@@ -58,7 +58,7 @@ const Navbar = () => {
           {user ? (
             <button
               onClick={handleLogout}
-              className="btn btn-sm btn-warning text-white"
+              className="btn btn-sm bg-teal-800 text-white"
             >
               Log out
             </button>
