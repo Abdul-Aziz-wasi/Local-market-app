@@ -130,13 +130,13 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/about"
+                to="/allproducts"
                 className={({ isActive }) =>
                   isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
                 }
                 onClick={() => setIsMenuOpen(false)}
               >
-                About Us
+                All Products
               </NavLink>
             </li>
           </ul>

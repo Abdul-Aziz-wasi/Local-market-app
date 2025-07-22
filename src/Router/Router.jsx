@@ -27,15 +27,16 @@ export const router = createBrowserRouter([
         },
         {
           path:'allproducts',
-          Component:AllProducts
-        }
-        // {
-        //   path:"/products/:id",
-        //   element:<PrivateRoute>
-        //   <ProductDetails></ProductDetails>
-        //   </PrivateRoute>,
-        //   loader:({params})=>fetch(`http://localhost:3000/products${params.id}`)
-        // },
+          Component:AllProducts,
+          // loader:()=>fetch('http://localhost:3000/products')
+        },
+        {
+          path:"/products/:id",
+          element:<PrivateRoute>
+          <ProductDetails></ProductDetails>
+          </PrivateRoute>,
+          
+        },
         
     ]
   },

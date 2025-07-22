@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import {  NavLink } from 'react-router';
 
 const Banner = () => {
+  // const navigate =useNavigate()
   return (
     <div
       className="relative bg-cover bg-center h-[70vh] flex items-center justify-center pt-4"
@@ -23,9 +25,13 @@ const Banner = () => {
         <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 drop-shadow-sm">
           Explore today’s prices of fresh vegetables and groceries. Stay informed, save money, and shop smarter every day.
         </p>
-        <button className="btn btn-primary btn-wide bg-teal-800 hover:bg-teal-700 text-white font-semibold">
+        <NavLink to='/allproducts'>
+        <button  className="btn btn-primary btn-wide bg-teal-800 hover:bg-teal-700 text-white font-semibold">
           Explore Products
+
         </button>
+          
+        </NavLink>
       </motion.div>
     </div>
   );
