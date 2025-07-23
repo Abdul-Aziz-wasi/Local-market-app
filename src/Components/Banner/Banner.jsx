@@ -9,7 +9,8 @@ const Banner = () => {
       className="relative bg-cover bg-center h-[70vh] flex items-center justify-center pt-4"
       style={{
         backgroundImage:
-          "url('https://images.pexels.com/photos/1656666/pexels-photo-1656666.jpeg')",
+          "url('https://vegina-store.myshopify.com/cdn/shop/files/slider21_9cb99305-d626-4305-ad42-679d229b90e0.jpg?v=1620480041&width=1500')",
+          // "url('https://images.pexels.com/photos/1656666/pexels-photo-1656666.jpeg')",
       }}
     >
       

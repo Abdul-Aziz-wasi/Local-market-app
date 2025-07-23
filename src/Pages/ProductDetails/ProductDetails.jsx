@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext';
 
-const DetailsPage = () => {
+const ProductDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
@@ -119,4 +119,4 @@ const DetailsPage = () => {
   );
 };
 
-export default DetailsPage;
+export default ProductDetails;
