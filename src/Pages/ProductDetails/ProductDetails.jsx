@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -9,6 +9,14 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate =useNavigate()
+
+
+  const handlePay=(id)=>{
+    console.log('payment',id)
+    navigate(`/payment/${id}`)
+
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/products/${id}`)
@@ -105,7 +113,7 @@ const ProductDetails = () => {
               ⭐ Add to Watchlist
             </button>
             <button
-              onClick={() => window.open('https://example.com/buy-product', '_blank')}
+              onClick={() => handlePay(product._id)}
               className="px-4 py-2 rounded bg-teal-600 hover:bg-teal-700 text-white"
             >
               🛒 Buy Product

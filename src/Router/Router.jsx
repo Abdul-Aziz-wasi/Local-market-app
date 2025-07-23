@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import AllProducts from "../Pages/AllProducts/AllProducts";
+import Payment from "../Pages/Payment/Payment";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>,
           
         },
+        {
+          path:'payment/:id',
+          Component:Payment
+        }
         
     ]
   },
