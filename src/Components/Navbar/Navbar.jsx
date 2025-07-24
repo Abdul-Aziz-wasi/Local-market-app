@@ -50,6 +50,16 @@ const Navbar = () => {
                 All products
               </NavLink>
             </li>
+
+            {user && (
+            <li>
+              <NavLink to="/dashboard" className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }>
+                Dashboard
+              </NavLink>
+            </li>
+          )}
           </ul>
         </div>
 

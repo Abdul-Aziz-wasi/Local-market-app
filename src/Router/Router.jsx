@@ -8,6 +8,10 @@ import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import Payment from "../Pages/Payment/Payment";
+import UserDashboard from "../UserDashboard/UserDashboard";
+import PriceTrends from "../UserDashboard/PriceTrends/PriceTrends";
+import ManageWatchlist from "../UserDashboard/ManageWatchlist/ManageWatchlist";
+import MyOrderList from "../UserDashboard/MyOrderList/MyOrderList";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +36,7 @@ export const router = createBrowserRouter([
           // loader:()=>fetch('http://localhost:3000/products')
         },
         {
-          path:"/products/:id",
+          path:"products/:id",
           element:<PrivateRoute>
           <ProductDetails></ProductDetails>
           </PrivateRoute>,
@@ -45,5 +49,14 @@ export const router = createBrowserRouter([
         
     ]
   },
+  {
+  path: '/dashboard',
+  element: <PrivateRoute><UserDashboard></UserDashboard></PrivateRoute>,
+  children: [
+    { path: 'trends', element: <PriceTrends /> },
+    { path: 'watchlist', element: <ManageWatchlist /> },
+    { path: 'orders', element: <MyOrderList /> },
+  ],
+},
 ]);
   

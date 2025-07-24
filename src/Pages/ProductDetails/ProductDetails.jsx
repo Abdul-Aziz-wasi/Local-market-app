@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext';
+import ReviewSection from '../../Components/ReviewSection/ReviewSection';
+import PriceComparisonChart from '../../Components/PriceComparisonChart/PriceComparisonChart';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -121,6 +123,9 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+
+      <ReviewSection></ReviewSection>
+      <PriceComparisonChart prices={prices}></PriceComparisonChart>
 
       {/* TODO: Add user reviews/comments section below here */}
     </motion.div>

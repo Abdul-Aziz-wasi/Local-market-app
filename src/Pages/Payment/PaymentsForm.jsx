@@ -1,14 +1,40 @@
 import {  CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useState } from 'react';
-import { useParams } from 'react-router';
+import React, { use, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import {useQuery} from '@tanstack/react-query'
+import axios from 'axios';
+import { AuthContext } from '../../contexts/AuthContext';
+import Swal from 'sweetalert2';
 
 const PaymentsForm = () => {
     const stripe =useStripe();
     const elements =useElements()
+    const {user}=use(AuthContext)
     const {id}=useParams()
+    const navigate =useNavigate()
     console.log(id)
 
     const [error,setError] =useState('')
+
+
+    const { data: productInfo = {}, isPending } = useQuery({
+  queryKey: ['products', id],
+  queryFn: async () => {
+    const res = await fetch(`http://localhost:3000/products/${id}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch product');
+    }
+    return res.json();
+  }
+});
+if(isPending){
+    return 'loading..'
+}
+    console.log(productInfo)
+
+    const latestPrice = productInfo.prices?.[productInfo.prices.length - 1]?.price;
+const price = latestPrice;
+console.log(price);
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
@@ -32,6 +58,57 @@ const PaymentsForm = () => {
             console.log('paymentMethod',paymentMethod)
 
         }
+
+
+      const res = await axios.post('http://localhost:3000/create-payment-intent', {
+  price: price
+});
+    const clientSecret =res.data.clientSecret;
+
+    const result =await stripe.confirmCardPayment(clientSecret,{
+        payment_method:{
+            card:elements.getElement(CardElement),
+            billing_details:{
+                name: user.displayName, 
+                email:user.eamil
+            },
+        },
+    }) 
+
+    if(result.error){
+        setError(result.error.message)
+
+    }else{
+        setError('')
+        if(result.paymentIntent.status === 'succeeded'){
+            console.log('payment succeeded')
+            const transactionId =result.paymentIntent.id
+            const paymentData ={
+                transactionId: transactionId,
+                email: user?.email, 
+                productId: id,
+                amount: latestPrice,
+                paymentMethod: result.paymentIntent.payment_method_types
+            }
+            const paymentRes =await axios.post("http://localhost:3000/Payments",
+                paymentData);
+                if(paymentRes.data.insertedId){ 
+                    console.log('payment successful',paymentData)
+                     Swal.fire({
+        title: '🎉 Payment Successful!',
+        html: `<p>Transaction ID:</p><code>${transactionId}</code>`,
+        icon: 'success',
+        confirmButtonText: 'Go to All Products',
+      }).then(() => {
+        navigate('/allproducts'); // ✅ Redirect
+      });
+                }
+
+        }
+    }
+
+
+
     }
     return (
         <div>
@@ -43,7 +120,7 @@ const PaymentsForm = () => {
                      className='btn bg-teal-600 text-white w-full'
                      type='submit'
                       disabled={!stripe}>
-                        Payment
+                        Payment  ৳{latestPrice}
                     </button>
                     {
                         error && <p className='text-red-500'>{error}</p>
