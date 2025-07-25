@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext';
 import ReviewSection from '../../Components/ReviewSection/ReviewSection';
 import PriceComparisonChart from '../../Components/PriceComparisonChart/PriceComparisonChart';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -12,6 +15,33 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate =useNavigate()
+
+  const handleAddToWatchlist = async () => {
+  try {
+    const watchItem = {
+      productId: product._id,
+      productName: product.productName,
+      marketName: product.marketName,
+      latestPrice: product.prices?.[product.prices.length - 1]?.price,
+      userEmail: user?.email,
+      addedAt: new Date(),
+      image: product.productImage
+    };
+
+    const res = await axios.post('http://localhost:3000/watchlist', watchItem);
+
+    if (res.data?.insertedId) {
+      toast.success(' Added to your watchlist');
+    }
+  } catch (err) {
+    if (err.response?.status === 409) {
+      toast.warn('⚠️ Already in your watchlist');
+    } else {
+      toast.error(' Failed to add');
+    }
+  }
+};
+
 
 
   const handlePay=(id)=>{
@@ -105,15 +135,16 @@ const ProductDetails = () => {
           {/* Buttons */}
           <div className="flex gap-4">
             <button
-              disabled={isWatchlistDisabled}
-              className={`px-4 py-2 rounded text-white ${
-                isWatchlistDisabled
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-teal-600 hover:bg-teal-700'
-              }`}
-            >
-              ⭐ Add to Watchlist
-            </button>
+  onClick={handleAddToWatchlist}
+  disabled={isWatchlistDisabled}
+  className={`px-4 py-2 rounded text-white ${
+    isWatchlistDisabled
+      ? 'bg-gray-400 cursor-not-allowed'
+      : 'bg-teal-600 hover:bg-teal-700'
+  }`}
+>
+  ⭐ Add to Watchlist
+</button>
             <button
               onClick={() => handlePay(product._id)}
               className="px-4 py-2 rounded bg-teal-600 hover:bg-teal-700 text-white"

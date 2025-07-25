@@ -4,6 +4,8 @@ import './index.css';
 import { RouterProvider } from 'react-router';
 import { router } from './Router/Router.jsx';
 import AuthProvider from './contexts/AuthProvider.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 // 🟩 React Query imports
 import {
@@ -19,6 +21,7 @@ createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
+         <ToastContainer position="top-center" autoClose={2000} />
       </AuthProvider>
     </QueryClientProvider>
   </StrictMode>

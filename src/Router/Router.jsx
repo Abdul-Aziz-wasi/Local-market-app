@@ -8,13 +8,18 @@ import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import Payment from "../Pages/Payment/Payment";
-import UserDashboard from "../UserDashboard/UserDashboard";
-import PriceTrends from "../UserDashboard/PriceTrends/PriceTrends";
-import ManageWatchlist from "../UserDashboard/ManageWatchlist/ManageWatchlist";
-import MyOrderList from "../UserDashboard/MyOrderList/MyOrderList";
+import DashboardLayout from "../Pages/Dashboard/DashboardLayout/DashboardLayout";
+
+import PriceTrends from "../Pages/Dashboard/User/PriceTrends";
+import RoleRoute from "../Pages/Dashboard/RoleRoute/RoleRoute";
+import ManageWatchlist from "../Pages/Dashboard/User/ManageWatchlist";
+import MyOrders from "../Pages/Dashboard/User/MyOrders";
+
+
+
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", 
     Component:RootLayout,
     children:[
         {
@@ -50,13 +55,43 @@ export const router = createBrowserRouter([
     ]
   },
   {
-  path: '/dashboard',
-  element: <PrivateRoute><UserDashboard></UserDashboard></PrivateRoute>,
-  children: [
-    { path: 'trends', element: <PriceTrends /> },
-    { path: 'watchlist', element: <ManageWatchlist /> },
-    { path: 'orders', element: <MyOrderList /> },
-  ],
-},
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      
+
+      // 🧑 User Routes
+      {
+        path: 'price-trends',
+        element: (
+          <RoleRoute allowedRoles={['user']}>
+            <PriceTrends />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: 'watchlist',
+        element: (
+          <RoleRoute allowedRoles={['user']}>
+            <ManageWatchlist />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: 'orders',
+        element: (
+          <RoleRoute allowedRoles={['user']}>
+            <MyOrders />
+          </RoleRoute>
+        ),
+      },
+
+      // 🛒 Vendor and 👑 Admin routes will go here later
+    ],
+  },
 ]);
   

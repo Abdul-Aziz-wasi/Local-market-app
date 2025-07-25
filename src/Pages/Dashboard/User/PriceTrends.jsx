@@ -6,13 +6,13 @@ const PriceTrends = () => {
   const { data = [] } = useQuery({
     queryKey: ['priceTrends'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:3000/price-trends'); // Make sure this exists
+      const res = await fetch('http://localhost:3000/price-trends');
       return res.json();
     },
   });
 
   return (
-    <div>
+    <div className="p-6">
       <h2 className="text-xl font-semibold mb-4">📊 Price Trend Analysis</h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
