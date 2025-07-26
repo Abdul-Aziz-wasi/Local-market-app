@@ -14,6 +14,8 @@ import PriceTrends from "../Pages/Dashboard/User/PriceTrends";
 import RoleRoute from "../Pages/Dashboard/RoleRoute/RoleRoute";
 import ManageWatchlist from "../Pages/Dashboard/User/ManageWatchlist";
 import MyOrders from "../Pages/Dashboard/User/MyOrders";
+import AddProduct from "../Pages/Dashboard/Vendor/AddProduct";
+import MyProducts from "../Pages/Dashboard/Vendor/MyProducts";
 
 
 
@@ -90,7 +92,42 @@ export const router = createBrowserRouter([
         ),
       },
 
+      
+
       // 🛒 Vendor and 👑 Admin routes will go here later
+
+      {
+      path: 'add-product',
+      element: (
+        <RoleRoute allowedRoles={['vendor']}>
+          <AddProduct />
+        </RoleRoute>
+      ),
+    },
+    {
+      path: 'my-products',
+      element: (
+        <RoleRoute allowedRoles={['vendor']}>
+          <MyProducts />
+        </RoleRoute>
+      ),
+    },
+    // {
+    //   path: 'add-advertisement',
+    //   element: (
+    //     <RoleRoute allowedRoles={['vendor']}>
+    //       <AddAdvertisement />
+    //     </RoleRoute>
+    //   ),
+    // },
+    // {
+    //   path: 'my-advertisements',
+    //   element: (
+    //     <RoleRoute allowedRoles={['vendor']}>
+    //       <MyAdvertisements />
+    //     </RoleRoute>
+    //   ),
+    // },
     ],
   },
 ]);

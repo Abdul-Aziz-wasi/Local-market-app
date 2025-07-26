@@ -1,8 +1,17 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router';
-
-import { FaChartLine, FaHeart, FaSignOutAlt, FaShoppingCart } from 'react-icons/fa';
+import {
+  FaChartLine,
+  FaHeart,
+  FaSignOutAlt,
+  FaShoppingCart,
+  FaBullhorn,
+  FaPlusCircle,
+  FaClipboardList,
+} from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthContext';
+import useUserRole from '../../../useUserRole/useUserRole';
+
 
 const DashboardLayout = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -12,26 +21,62 @@ const DashboardLayout = () => {
     logOutUser()
       .then(() => console.log('Sign out user'))
       .catch(console.error);
-      navigate('/')
+    navigate('/');
   };
 
-  const menuItems = [
-    {
-      path: '/dashboard/price-trends',
-      label: '📊 Price Trends',
-      icon: <FaChartLine />,
-    },
-    {
-      path: '/dashboard/watchlist',
-      label: '🛠️ Manage Watchlist',
-      icon: <FaHeart />,
-    },
-    {
-      path: '/dashboard/orders',
-      label: '🛒 My Orders',
-      icon: <FaShoppingCart />,
-    },
-  ];
+  const { role, isRoleLoading } = useUserRole(user?.email);
+
+  if (isRoleLoading) {
+    return <div className="p-6">Loading dashboard...</div>;
+  }
+
+  // Dynamically set menu based on role
+  let menuItems = [];
+
+  if (role === 'user') {
+    menuItems = [
+      {
+        path: '/dashboard/price-trends',
+        label: '📊 Price Trends',
+        icon: <FaChartLine />,
+      },
+      {
+        path: '/dashboard/watchlist',
+        label: '🛠️ Manage Watchlist',
+        icon: <FaHeart />,
+      },
+      {
+        path: '/dashboard/orders',
+        label: '🛒 My Orders',
+        icon: <FaShoppingCart />,
+      },
+    ];
+  }
+
+  if (role === 'vendor') {
+    menuItems = [
+      {
+        path: '/dashboard/add-product',
+        label: '📝 Add Product',
+        icon: <FaPlusCircle />,
+      },
+      {
+        path: '/dashboard/my-products',
+        label: '📄 My Products',
+        icon: <FaClipboardList />,
+      },
+      {
+        path: '/dashboard/add-advertisement',
+        label: '📢 Add Advertisement',
+        icon: <FaBullhorn />,
+      },
+      {
+        path: '/dashboard/my-advertisements',
+        label: '📊 My Advertisements',
+        icon: <FaChartLine />,
+      },
+    ];
+  }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -52,14 +97,14 @@ const DashboardLayout = () => {
               {item.icon}
               {item.label}
             </NavLink>
-            
           ))}
           <li>
-    <Link to="/" className="hover:text-teal-600 font-medium">
-      🏠 Home
-    </Link>
-  </li>
+            <Link to="/" className="hover:text-teal-300 font-medium">
+              🏠 Home
+            </Link>
+          </li>
         </div>
+
         <button
           onClick={handleLogout}
           className="flex items-center gap-2 mt-10 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white"
@@ -72,7 +117,9 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <main className="flex-1 bg-gray-50 p-4">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">Welcome, {user?.displayName || 'User'} 👋</h2>
+          <h2 className="text-xl font-semibold text-gray-800">
+            Welcome, {user?.displayName || user.email} 👋
+          </h2>
           <p className="text-sm text-gray-600">{user?.email}</p>
         </div>
         <Outlet />

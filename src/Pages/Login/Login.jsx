@@ -4,21 +4,38 @@ import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const Login = ({ isOpen, onClose, redirectTo = '/' }) => {
   const { loginUser, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleGoogleLogin = () => {
-    loginWithGoogle()
-      .then(result => {
-        console.log(result)
-        toast.success('Logged in with Google');
-        onClose();
-        navigate(redirectTo); // ✅ go to original page
-      })
-      .catch(error => toast.error(error.message));
-  };
+ 
+const handleGoogleLogin = () => {
+  loginWithGoogle()
+    .then(async (result) => {
+      const user = result.user;
+
+      // 👇 Save to DB if not already exists
+      await axios.post('http://localhost:3000/users', {
+        email: user.email,
+        name: user.displayName,
+        photo: user.photoURL,
+        role: 'user' // Or 'vendor' if this is vendor registration
+      }).catch(error => {
+        // ignore duplicate (status 409), show error for others
+        if (error.response?.status !== 409) {
+          console.error("Failed to save user:", error);
+          toast.error("User save failed");
+        }
+      });
+
+      toast.success('Logged in with Google');
+      onClose();
+      navigate(redirectTo);
+    })
+    .catch(error => toast.error(error.message));
+};
 
   const handleLogin = async (e) => {
     e.preventDefault();

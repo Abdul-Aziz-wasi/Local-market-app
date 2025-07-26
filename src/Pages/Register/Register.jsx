@@ -3,23 +3,32 @@ import { motion } from 'framer-motion';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 const Register = ({ isOpen, onClose }) => {
   const { createUser, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleGoogleLogin = () => {
-    loginWithGoogle()
-      .then((result) => {
-        console.log(result);
-        toast.success('Registered with Google');
-        onClose();
-        navigate('/');
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error(error.message);
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await loginWithGoogle();
+      const { email, displayName, photoURL } = result.user;
+
+      // ✅ Save user to DB (if not exists)
+      await axios.post('http://localhost:3000/users', {
+        email,
+        name: displayName,
+        photo: photoURL,
+        role: 'user'
       });
+
+      toast.success('Registered with Google');
+      onClose();
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
   };
 
   const handleRegister = async (e) => {
@@ -30,11 +39,21 @@ const Register = ({ isOpen, onClose }) => {
 
     try {
       const result = await createUser(email, password);
-      console.log(result.user);
+      const user = result.user;
+
+      // ✅ Insert to DB after manual signup
+      await axios.post('http://localhost:3000/users', {
+        email: user.email,
+        name: user.displayName || 'Anonymous',
+        photo: user.photoURL || '',
+        role: 'user'
+      });
+
       toast.success('Registration successful');
       onClose();
       navigate('/');
     } catch (error) {
+      console.error(error);
       toast.error(error.message);
     }
   };

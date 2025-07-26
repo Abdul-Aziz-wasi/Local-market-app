@@ -5,7 +5,7 @@ import axios from 'axios';
 const useUserRole = (email) => {
   const { data: role = '', isLoading: isRoleLoading } = useQuery({
     queryKey: ['userRole', email],
-    enabled: !!email, // Only run if email exists
+    enabled: !!email, 
     queryFn: async () => {
       const res = await axios.get(`http://localhost:3000/users/role/${email}`);
       return res.data?.role;
