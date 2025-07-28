@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
+import Swal from 'sweetalert2';
 
 const MyProducts = () => {
   const { user } = use(AuthContext);
@@ -20,18 +21,28 @@ const MyProducts = () => {
   });
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm('Are you sure you want to delete this product?');
-    if (!confirm) return;
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "This action can't be undone!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!',
+  });
 
+  if (result.isConfirmed) {
     try {
       await axios.delete(`http://localhost:3000/products/${id}`);
       toast.success('Product deleted successfully');
       refetch();
     } catch (err) {
       toast.error('Failed to delete product');
-      console.log(err)
+      console.error(err);
     }
-  };
+  }
+};
+
 
   return (
     <div className="p-6">

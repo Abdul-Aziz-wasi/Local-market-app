@@ -16,6 +16,13 @@ import ManageWatchlist from "../Pages/Dashboard/User/ManageWatchlist";
 import MyOrders from "../Pages/Dashboard/User/MyOrders";
 import AddProduct from "../Pages/Dashboard/Vendor/AddProduct";
 import MyProducts from "../Pages/Dashboard/Vendor/MyProducts";
+import UpdateProduct from "../Pages/Dashboard/Vendor/UpdateProduct";
+import AddAdvertisement from "../Pages/Dashboard/Vendor/AddAdvertisement";
+import MyAdvertisements from "../Pages/Dashboard/Vendor/MyAdvertisements";
+import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
+import AllProduct from "../Pages/Dashboard/Admin/AllProduct";
+import AllAdvertisements from "../Pages/Dashboard/Admin/AllAdvertisements";
+import AllOrders from "../Pages/Dashboard/Admin/AllOrders";
 
 
 
@@ -94,7 +101,7 @@ export const router = createBrowserRouter([
 
       
 
-      // 🛒 Vendor and 👑 Admin routes will go here later
+      // 🛒 Vendor routes
 
       {
       path: 'add-product',
@@ -112,22 +119,58 @@ export const router = createBrowserRouter([
         </RoleRoute>
       ),
     },
-    // {
-    //   path: 'add-advertisement',
-    //   element: (
-    //     <RoleRoute allowedRoles={['vendor']}>
-    //       <AddAdvertisement />
-    //     </RoleRoute>
-    //   ),
-    // },
-    // {
-    //   path: 'my-advertisements',
-    //   element: (
-    //     <RoleRoute allowedRoles={['vendor']}>
-    //       <MyAdvertisements />
-    //     </RoleRoute>
-    //   ),
-    // },
+    {
+      path:"/dashboard/update-product/:id",
+      Component:UpdateProduct
+    },
+    {
+      path: 'add-advertisement',
+      element: (
+        <RoleRoute allowedRoles={['vendor']}>
+          <AddAdvertisement />
+        </RoleRoute>
+      ),
+    },
+    {
+      path: 'my-advertisements',
+      element: (
+        <RoleRoute allowedRoles={['vendor']}>
+          <MyAdvertisements />
+        </RoleRoute>
+      ),
+    },
+     {
+        path: "all-users",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <AllUsers />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "all-products",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <AllProduct />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "all-advertisements",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <AllAdvertisements />
+          </RoleRoute>
+        ),
+      },
+      {
+        path: "all-orders",
+        element: (
+          <RoleRoute allowedRoles={["admin"]}>
+            <AllOrders />
+          </RoleRoute>
+        ),
+      },
     ],
   },
 ]);

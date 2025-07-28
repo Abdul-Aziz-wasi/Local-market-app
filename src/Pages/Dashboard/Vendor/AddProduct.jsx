@@ -91,8 +91,8 @@ const AddProduct = () => {
           type="number"
           step="0.01"
         />
-        <button type="submit" className="btn bg-green-600 text-white w-full">
-          ➕ Submit Product
+        <button type="submit" className="btn bg-teal-600 text-white w-full">
+           Submit Product
         </button>
       </form>
     </div>
