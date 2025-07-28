@@ -78,6 +78,32 @@ const DashboardLayout = () => {
     ];
   }
 
+  if (role === 'admin') {
+  menuItems = [
+    {
+      path: '/dashboard/all-users',
+      label: '👥 All Users',
+      icon: <FaClipboardList />,
+    },
+    {
+      path: '/dashboard/all-products',
+      label: '📋 All Products',
+      icon: <FaClipboardList />,
+    },
+    {
+      path: '/dashboard/all-ads',
+      label: '📢 All Advertisements',
+      icon: <FaBullhorn />,
+    },
+    {
+      path: '/dashboard/all-orders',
+      label: '🛒 All Orders',
+      icon: <FaShoppingCart />,
+    },
+  ];
+}
+
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}

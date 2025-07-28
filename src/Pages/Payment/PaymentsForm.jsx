@@ -81,30 +81,33 @@ console.log(price);
     }else{
         setError('')
         if(result.paymentIntent.status === 'succeeded'){
-            console.log('payment succeeded')
-            const transactionId =result.paymentIntent.id
-            const paymentData ={
-                transactionId: transactionId,
-                email: user?.email, 
-                productId: id,
-                amount: latestPrice,
-                paymentMethod: result.paymentIntent.payment_method_types
-            }
-            const paymentRes =await axios.post("http://localhost:3000/Payments",
-                paymentData);
-                if(paymentRes.data.insertedId){ 
-                    console.log('payment successful',paymentData)
-                     Swal.fire({
-        title: '🎉 Payment Successful!',
-        html: `<p>Transaction ID:</p><code>${transactionId}</code>`,
-        icon: 'success',
-        confirmButtonText: 'Go to All Products',
-      }).then(() => {
-        navigate('/allproducts'); // ✅ Redirect
-      });
-                }
+  console.log('payment succeeded')
+  const transactionId = result.paymentIntent.id;
 
-        }
+  const paymentData = {
+    transactionId: transactionId,
+    email: user?.email,
+    productId: id,
+    productName: productInfo.itemName, // ✅ required by backend
+    amount: latestPrice,
+    paymentMethod: result.paymentIntent.payment_method_types
+  }
+
+  const paymentRes = await axios.post("http://localhost:3000/payments", paymentData);
+
+  if(paymentRes.data.insertedId){ 
+    console.log('payment successful', paymentData);
+    Swal.fire({
+      title: '🎉 Payment Successful!',
+      html: `<p>Transaction ID:</p><code>${transactionId}</code>`,
+      icon: 'success',
+      confirmButtonText: 'Go to All Products',
+    }).then(() => {
+      navigate('/allproducts'); // ✅ Redirect
+    });
+  }
+}
+
     }
 
 

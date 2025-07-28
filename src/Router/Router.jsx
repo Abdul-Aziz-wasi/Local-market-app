@@ -23,6 +23,7 @@ import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 import AllProduct from "../Pages/Dashboard/Admin/AllProduct";
 import AllAdvertisements from "../Pages/Dashboard/Admin/AllAdvertisements";
 import AllOrders from "../Pages/Dashboard/Admin/AllOrders";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 
 
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
   {
     path: "/", 
     Component:RootLayout,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
         {
             index:true,
@@ -156,7 +158,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "all-advertisements",
+        path: "all-ads",
         element: (
           <RoleRoute allowedRoles={["admin"]}>
             <AllAdvertisements />

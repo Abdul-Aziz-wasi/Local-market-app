@@ -10,8 +10,9 @@ const AllProducts = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [redirectTo, setRedirectTo] = useState('/');
   const [sortOrder, setSortOrder] = useState('');
-//   const [startDate, setStartDate] = useState('');
-//   const [endDate, setEndDate] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 6;
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -19,14 +20,16 @@ const AllProducts = () => {
   const fetchProducts = () => {
     setLoading(true);
     const params = new URLSearchParams();
+    params.append('page', currentPage);
+    params.append('limit', limit);
     if (sortOrder) params.append('sort', sortOrder);
-    // if (startDate) params.append('startDate', startDate);
-    // if (endDate) params.append('endDate', endDate);
 
     fetch(`http://localhost:3000/all-products?${params.toString()}`)
       .then(res => res.json())
       .then(data => {
-        setProducts(data);
+        setProducts(data.products);
+        setTotalPages(data.totalPages);
+        setCurrentPage(data.currentPage);
         setLoading(false);
       })
       .catch(err => {
@@ -37,7 +40,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [sortOrder]);
+  }, [sortOrder, currentPage]);
 
   const handleViewDetails = (id) => {
     if (!user) {
@@ -58,33 +61,15 @@ const AllProducts = () => {
 
   return (
     <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }} className="max-w-7xl mx-auto px-6 py-10">
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="max-w-7xl mx-auto px-6 py-10"
+    >
       <h2 className="text-3xl font-bold text-teal-800 text-center mb-6">🧺 All Products</h2>
 
-      {/* Filter & Sort Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-        <div className="flex flex-col sm:flex-row gap-4">
-          {/* <div>
-            <label className="block text-sm mb-1">Start Date</label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="border rounded px-2 py-1"
-            />
-          </div> */}
-          {/* <div>
-            <label className="block text-sm mb-1">End Date</label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="border rounded px-2 py-1"
-            />
-          </div> */}
-        </div>
+      {/* Sort Control */}
+      <div className="flex justify-end mb-6">
         <div>
           <label className="block text-sm mb-1">Sort By Price</label>
           <select
@@ -99,6 +84,7 @@ const AllProducts = () => {
         </div>
       </div>
 
+      {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map(product => {
           const {
@@ -140,6 +126,23 @@ const AllProducts = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="mt-8 flex justify-center gap-2 flex-wrap">
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => setCurrentPage(i + 1)}
+            className={`px-4 py-2 rounded border ${
+              currentPage === i + 1
+                ? 'bg-teal-600 text-white'
+                : 'bg-white text-teal-700 border-teal-600'
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
       </div>
 
       {/* Login Modal */}
