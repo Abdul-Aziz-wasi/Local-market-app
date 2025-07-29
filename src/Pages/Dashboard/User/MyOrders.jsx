@@ -11,7 +11,7 @@ const MyOrders = () => {
     queryKey: ['payments', user?.email],
     enabled: !!user?.email, // avoid running if email is undefined
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3000/payments/${user.email}`);
+      const res = await fetch(`https://local-market-omega.vercel.app/payments/${user.email}`);
       return res.json();
     },
   });

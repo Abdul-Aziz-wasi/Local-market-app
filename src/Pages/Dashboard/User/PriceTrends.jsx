@@ -6,7 +6,7 @@ const PriceTrends = () => {
   const { data = [] } = useQuery({
     queryKey: ['priceTrends'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:3000/price-trends');
+      const res = await fetch('https://local-market-omega.vercel.app/price-trends');
       return res.json();
     },
   });

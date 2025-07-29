@@ -20,7 +20,7 @@ const PaymentsForm = () => {
     const { data: productInfo = {}, isPending } = useQuery({
   queryKey: ['products', id],
   queryFn: async () => {
-    const res = await fetch(`http://localhost:3000/products/${id}`);
+    const res = await fetch(`https://local-market-omega.vercel.app/products/${id}`);
     if (!res.ok) {
       throw new Error('Failed to fetch product');
     }
@@ -60,7 +60,7 @@ console.log(price);
         }
 
 
-      const res = await axios.post('http://localhost:3000/create-payment-intent', {
+      const res = await axios.post('https://local-market-omega.vercel.app/create-payment-intent', {
   price: price
 });
     const clientSecret =res.data.clientSecret;
@@ -93,7 +93,7 @@ console.log(price);
     paymentMethod: result.paymentIntent.payment_method_types
   }
 
-  const paymentRes = await axios.post("http://localhost:3000/payments", paymentData);
+  const paymentRes = await axios.post("https://local-market-omega.vercel.app/payments", paymentData);
 
   if(paymentRes.data.insertedId){ 
     console.log('payment successful', paymentData);

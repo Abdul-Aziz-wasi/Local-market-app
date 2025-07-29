@@ -12,14 +12,14 @@ const ManageWatchlist = () => {
   const { data: watchlist = [] } = useQuery({
     queryKey: ['watchlist', user.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3000/watchlist/${user.email}`);
+      const res = await fetch(`https://local-market-omega.vercel.app/watchlist/${user.email}`);
       return res.json();
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await fetch(`http://localhost:3000/watchlist/${id}`, { method: 'DELETE' });
+      const res = await fetch(`https://local-market-omega.vercel.app/watchlist/${id}`, { method: 'DELETE' });
       return res.json();
     },
     onSuccess: () => {

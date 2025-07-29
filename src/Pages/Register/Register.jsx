@@ -15,7 +15,7 @@ const Register = ({ isOpen, onClose }) => {
       const { email, displayName, photoURL } = result.user;
 
       // ✅ Save user to DB (if not exists)
-      await axios.post('http://localhost:3000/users', {
+      await axios.post('https://local-market-omega.vercel.app/users', {
         email,
         name: displayName,
         photo: photoURL,
@@ -42,7 +42,7 @@ const Register = ({ isOpen, onClose }) => {
       const user = result.user;
 
       // ✅ Insert to DB after manual signup
-      await axios.post('http://localhost:3000/users', {
+      await axios.post('https://local-market-omega.vercel.app/users', {
         email: user.email,
         name: user.displayName || 'Anonymous',
         photo: user.photoURL || '',

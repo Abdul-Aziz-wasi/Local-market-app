@@ -32,7 +32,7 @@ const AddProduct = () => {
     };
 
     try {
-      const res = await axios.post('http://localhost:3000/products', product);
+      const res = await axios.post('https://local-market-omega.vercel.app/products', product);
       if (res.data.insertedId) {
         toast.success('✅ Product added successfully and pending approval!');
         reset();

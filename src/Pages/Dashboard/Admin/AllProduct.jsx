@@ -8,7 +8,7 @@ const AllProduct = () => {
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/all-products')
+    axios.get('https://local-market-omega.vercel.app/all-products')
       .then(res => setProducts(res.data))
       .catch(err => {
         console.error(err);
@@ -18,7 +18,7 @@ const AllProduct = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.put(`http://localhost:3000/product/${id}`, { status: 'approved' });
+      await axios.put(`https://local-market-omega.vercel.app/product/${id}`, { status: 'approved' });
       toast.success('Product approved');
       refresh();
     } catch {
@@ -28,7 +28,7 @@ const AllProduct = () => {
 
   const handleReject = async (id) => {
     try {
-      await axios.put(`http://localhost:3000/product/${id}`, { status: 'rejected' });
+      await axios.put(`https://local-market-omega.vercel.app/product/${id}`, { status: 'rejected' });
       toast.warn('Product rejected');
       refresh();
     } catch {
@@ -38,7 +38,7 @@ const AllProduct = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/products/${deleteId}`);
+      await axios.delete(`https://local-market-omega.vercel.app/products/${deleteId}`);
       toast.success('Product deleted');
       setDeleteId(null);
       refresh();
@@ -48,7 +48,7 @@ const AllProduct = () => {
   };
 
   const refresh = async () => {
-    const res = await axios.get('http://localhost:3000/all-products');
+    const res = await axios.get('https://local-market-omega.vercel.app/all-products');
     setProducts(res.data);
   };
 

@@ -8,7 +8,7 @@ const AllUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/users?search=${search}`);
+      const res = await axios.get(`https://local-market-omega.vercel.app/users?search=${search}`);
       setUsers(res.data);
     } catch {
       toast.error('Failed to fetch users');
@@ -21,7 +21,7 @@ const AllUsers = () => {
 
   const handleRoleUpdate = async (id, newRole) => {
     try {
-      await axios.patch(`http://localhost:3000/users/role/${id}`, { role: newRole });
+      await axios.patch(`https://local-market-omega.vercel.app/users/role/${id}`, { role: newRole });
       toast.success('Role updated');
       fetchUsers();
     } catch {

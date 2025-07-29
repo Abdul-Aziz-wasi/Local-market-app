@@ -7,7 +7,7 @@ const useUserRole = (email) => {
     queryKey: ['userRole', email],
     enabled: !!email, 
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/users/role/${email}`);
+      const res = await axios.get(`https://local-market-omega.vercel.app/users/role/${email}`);
       return res.data?.role;
     }
   });

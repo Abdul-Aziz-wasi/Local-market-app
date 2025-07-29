@@ -6,7 +6,7 @@ const AllOrders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/orders')
+    axios.get('https://local-market-omega.vercel.app/orders')
       .then(res => setOrders(res.data))
       .catch(() => toast.error('Failed to load orders'));
   }, []);

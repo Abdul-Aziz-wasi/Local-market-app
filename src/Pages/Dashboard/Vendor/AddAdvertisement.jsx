@@ -22,7 +22,7 @@ const AddAdvertisement = () => {
     console.log(newAd)
 
     try {
-      const res = await axios.post('http://localhost:3000/advertisements', newAd);
+      const res = await axios.post('https://local-market-omega.vercel.app/advertisements', newAd);
       if (res.data.insertedId) {
         toast.success('Advertisement submitted for review!');
         form.reset();

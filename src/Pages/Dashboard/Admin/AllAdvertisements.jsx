@@ -7,19 +7,19 @@ const AllAdvertisements = () => {
   const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/advertisements')
+    axios.get('https://local-market-omega.vercel.app/advertisements')
       .then(res => setAds(res.data))
       .catch(() => toast.error("Failed to load advertisements"));
   }, []);
 
   const refresh = async () => {
-    const res = await axios.get('http://localhost:3000/advertisements');
+    const res = await axios.get('https://local-market-omega.vercel.app/advertisements');
     setAds(res.data);
   };
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:3000/advertisements/${id}`, { status: newStatus });
+      await axios.put(`https://local-market-omega.vercel.app/advertisements/${id}`, { status: newStatus });
       toast.success(`Ad marked as ${newStatus}`);
       refresh();
     } catch {
@@ -29,7 +29,7 @@ const AllAdvertisements = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/advertisements/${deleteId}`);
+      await axios.delete(`https://local-market-omega.vercel.app/advertisements/${deleteId}`);
       toast.success("Advertisement deleted");
       setDeleteId(null);
       refresh();

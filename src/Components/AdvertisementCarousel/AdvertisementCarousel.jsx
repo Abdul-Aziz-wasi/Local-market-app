@@ -6,7 +6,7 @@ const AdvertisementCarousel = () => {
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/advertisements')
+    fetch('https://local-market-omega.vercel.app/advertisements')
       .then(res => res.json())
       .then(data => setAds(data))
       .catch(err => console.error('Failed to fetch ads:', err));

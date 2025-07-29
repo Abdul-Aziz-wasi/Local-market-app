@@ -28,7 +28,7 @@ const ProductDetails = () => {
       image: product.productImage
     };
 
-    const res = await axios.post('http://localhost:3000/watchlist', watchItem);
+    const res = await axios.post('https://local-market-omega.vercel.app/watchlist', watchItem);
 
     if (res.data?.insertedId) {
       toast.success(' Added to your watchlist');
@@ -51,7 +51,7 @@ const ProductDetails = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/products/${id}`)
+    fetch(`https://local-market-omega.vercel.app/products/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('Product not found');
         return res.json();

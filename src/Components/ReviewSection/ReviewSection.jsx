@@ -23,7 +23,7 @@ const ReviewSection = () => {
     };
 
     try {
-      const res = await axios.post('http://localhost:3000/reviews', review);
+      const res = await axios.post('https://local-market-omega.vercel.app/reviews', review);
       if (res.data.insertedId) {
         setComment('');
         setRating(0);
@@ -35,7 +35,7 @@ const ReviewSection = () => {
   };
 
   const fetchReviews = async () => {
-    const res = await axios.get(`http://localhost:3000/reviews/${productId}`);
+    const res = await axios.get(`https://local-market-omega.vercel.app/reviews/${productId}`);
     setReviews(res.data);
   };
 

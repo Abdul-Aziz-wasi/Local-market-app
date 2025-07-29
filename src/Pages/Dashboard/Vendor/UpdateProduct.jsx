@@ -11,7 +11,7 @@ const UpdateProduct = () => {
 
   // Fetch product data by ID
   useEffect(() => {
-    axios.get(`http://localhost:3000/product/${id}`)
+    axios.get(`https://local-market-omega.vercel.app/product/${id}`)
       .then(res => {
         setProduct(res.data);
         setLoading(false);
@@ -37,7 +37,7 @@ const UpdateProduct = () => {
     };
 
     try {
-      await axios.put(`http://localhost:3000/product/${id}`, updatedProduct);
+      await axios.put(`https://local-market-omega.vercel.app/product/${id}`, updatedProduct);
       toast.success('Product updated successfully');
       navigate('/dashboard/my-products');
     } catch (error) {

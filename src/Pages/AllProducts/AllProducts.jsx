@@ -23,7 +23,7 @@ const AllProducts = () => {
     // if (startDate) params.append('startDate', startDate);
     // if (endDate) params.append('endDate', endDate);
 
-    fetch(`http://localhost:3000/all-products?${params.toString()}`)
+    fetch(`https://local-market-omega.vercel.app/all-products?${params.toString()}`)
       .then(res => res.json())
       .then(data => {
         setProducts(data);

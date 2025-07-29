@@ -13,7 +13,7 @@ const MyAdvertisements = () => {
 
   useEffect(() => {
     if (user?.email) {
-      axios.get(`http://localhost:3000/my-advertisements/${user.email}`)
+      axios.get(`https://local-market-omega.vercel.app/my-advertisements/${user.email}`)
         .then(res => setAds(res.data))
         .catch(() => toast.error('Failed to load ads'));
     }
@@ -38,7 +38,7 @@ useEffect(() => {
     };
 
     try {
-      await axios.put(`http://localhost:3000/advertisements/${selectedAd._id}`, updatedAd);
+      await axios.put(`https://local-market-omega.vercel.app/advertisements/${selectedAd._id}`, updatedAd);
       toast.success('Ad updated');
       setShowEditModal(false);
       refreshAds();
@@ -49,7 +49,7 @@ useEffect(() => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/advertisements/${selectedAd._id}`);
+      await axios.delete(`https://local-market-omega.vercel.app/advertisements/${selectedAd._id}`);
       toast.success('Ad deleted');
       setShowDeleteModal(false);
       refreshAds();
@@ -60,7 +60,7 @@ useEffect(() => {
 
   const refreshAds = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/my-advertisements/${user.email}`);
+      const res = await axios.get(`https://local-market-omega.vercel.app/my-advertisements/${user.email}`);
       setAds(res.data);
     } catch {
       toast.error('Failed to refresh ads');

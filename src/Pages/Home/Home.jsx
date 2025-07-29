@@ -6,7 +6,7 @@ import TrendingItems from '../../ExtraSection/TrendingItems';
 import MarketTips from '../../ExtraSection/MarketTips';
 
 
-const productsPromise =fetch('http://localhost:3000/products').then(res=>res.json())
+const productsPromise =fetch('https://local-market-omega.vercel.app/products').then(res=>res.json())
 
 const Home = () => {
  

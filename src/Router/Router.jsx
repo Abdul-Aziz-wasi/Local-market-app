@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
         {
           path:'allproducts',
           Component:AllProducts,
-          // loader:()=>fetch('http://localhost:3000/products')
+          // loader:()=>fetch('https://local-market-omega.vercel.app/products')
         },
         {
           path:"products/:id",

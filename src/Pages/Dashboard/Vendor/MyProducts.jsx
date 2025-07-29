@@ -15,7 +15,7 @@ const MyProducts = () => {
     queryKey: ['vendorProducts', user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/vendor-products/${user.email}`);
+      const res = await axios.get(`https://local-market-omega.vercel.app/vendor-products/${user.email}`);
       return res.data;
     },
   });
@@ -33,7 +33,7 @@ const MyProducts = () => {
 
   if (result.isConfirmed) {
     try {
-      await axios.delete(`http://localhost:3000/products/${id}`);
+      await axios.delete(`https://local-market-omega.vercel.app/products/${id}`);
       toast.success('Product deleted successfully');
       refetch();
     } catch (err) {

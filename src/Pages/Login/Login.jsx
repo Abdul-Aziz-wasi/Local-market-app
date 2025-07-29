@@ -17,7 +17,7 @@ const handleGoogleLogin = () => {
       const user = result.user;
 
       // 👇 Save to DB if not already exists
-      await axios.post('http://localhost:3000/users', {
+      await axios.post('https://local-market-omega.vercel.app/users', {
         email: user.email,
         name: user.displayName,
         photo: user.photoURL,
