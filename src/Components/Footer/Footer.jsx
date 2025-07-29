@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import logo from '../../assets/logo.png'; // Update the path based on your folder structure
+import { Link, NavLink } from 'react-router';
+// import logo from '../../assets/logo.png'; // Update the path based on your folder structure
 
 const Footer = () => {
   return (
@@ -9,8 +10,9 @@ const Footer = () => {
         
         {/* Logo & Website Name */}
         <div>
-          <img src={logo} alt="Logo" className="w-14 h-14 mb-2" />
-          <h3 className="text-xl font-semibold">Local Market Tracker</h3>
+          {/* <img src={logo} alt="Logo" className="w-14 h-14 mb-2" /> */}
+          <h3 className=' font-bold '><span className='text-2xl text-green-500'>V</span>egist</h3>
+          <h3 className="text-xl font-semibold">Local Market</h3>
           <p className="text-sm text-gray-300 mt-1">Tracking daily prices made easy</p>
         </div>
 
@@ -26,8 +28,11 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-semibold mb-2">Useful Links</h4>
           <ul className="space-y-1 text-sm text-gray-300">
-            <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
-            <li><a href="/privacy" className="hover:underline">Privacy Policy</a></li>
+            {/* <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
+            <li><a href="/privacy" className="hover:underline">Privacy Policy</a></li> */}
+
+            <Link to='terms'><p>Terms & Conditions</p></Link>
+            <Link to='privacy'><p>Privacy Policy</p></Link>
          
           </ul>
         </div>

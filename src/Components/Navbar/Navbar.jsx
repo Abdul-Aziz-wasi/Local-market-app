@@ -4,7 +4,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 import Register from '../../Pages/Register/Register';
 import Login from '../../Pages/Login/Login';
-import logo from '../../assets/logo.png';
+// import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -24,7 +24,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-start">
           <NavLink to="/">
-           <img src={logo} alt="Logo" className="w-14 h-14 mb-2" />
+           <h3 className=' font-bold '><span className='text-2xl text-green-500'>V</span>egist</h3>
           </NavLink>
         </div>
 
@@ -151,7 +151,8 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-               {user && (
+              
+            {user && (
             <li>
               <NavLink to="/dashboard" className={({ isActive }) =>
                   isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'

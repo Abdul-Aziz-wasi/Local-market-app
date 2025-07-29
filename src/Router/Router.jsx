@@ -24,6 +24,8 @@ import AllProduct from "../Pages/Dashboard/Admin/AllProduct";
 import AllAdvertisements from "../Pages/Dashboard/Admin/AllAdvertisements";
 import AllOrders from "../Pages/Dashboard/Admin/AllOrders";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import TermsAndConditions from "../Components/TermsAndConditions";
+import PrivacyPolicy from "../Components/PrivacyPolicy";
 
 
 
@@ -61,6 +63,15 @@ export const router = createBrowserRouter([
         {
           path:'payment/:id',
           Component:Payment
+        },
+        {
+          path:'terms',
+          Component:TermsAndConditions
+
+        },
+        {
+          path:'privacy',
+          Component:PrivacyPolicy
         }
         
     ]
