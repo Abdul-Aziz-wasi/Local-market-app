@@ -27,7 +27,7 @@ const ReviewSection = () => {
       if (res.data.insertedId) {
         setComment('');
         setRating(0);
-        fetchReviews(); // refresh list
+        fetchReviews(); 
       }
     } catch (err) {
       console.error(err);

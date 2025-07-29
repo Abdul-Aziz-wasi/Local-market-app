@@ -16,14 +16,14 @@ const handleGoogleLogin = () => {
     .then(async (result) => {
       const user = result.user;
 
-      // 👇 Save to DB if not already exists
+      
       await axios.post('https://local-market-omega.vercel.app/users', {
         email: user.email,
         name: user.displayName,
         photo: user.photoURL,
-        role: 'user' // Or 'vendor' if this is vendor registration
+        role: 'user' 
       }).catch(error => {
-        // ignore duplicate (status 409), show error for others
+       
         if (error.response?.status !== 409) {
           console.error("Failed to save user:", error);
           toast.error("User save failed");
@@ -48,7 +48,7 @@ const handleGoogleLogin = () => {
       console.log(result)
       toast.success('Login successful');
       onClose();
-      navigate(redirectTo); // ✅ go to original page
+      navigate(redirectTo); 
     } catch (error) {
       toast.error(error.message);
     }

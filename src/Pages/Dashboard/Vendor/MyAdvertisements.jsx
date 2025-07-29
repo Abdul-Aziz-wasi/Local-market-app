@@ -20,11 +20,11 @@ const MyAdvertisements = () => {
   }, [user?.email]);
 
   useEffect(() => {
-  console.log('User:', user); // check if user is available
+  console.log('User:', user); 
 }, [user]);
 
 useEffect(() => {
-  console.log('Fetched ads:', ads); // check fetched ads
+  console.log('Fetched ads:', ads); 
 }, [ads]);
 
   const handleUpdate = async (e) => {

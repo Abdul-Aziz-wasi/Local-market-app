@@ -33,7 +33,7 @@ const AllUsers = () => {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">👥 All Users</h2>
 
-      {/* 🔍 Search bar */}
+      {/*  Search bar */}
       <div className="mb-4 max-w-md">
         <input
           type="text"

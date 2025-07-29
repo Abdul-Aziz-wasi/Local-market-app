@@ -88,7 +88,7 @@ console.log(price);
     transactionId: transactionId,
     email: user?.email,
     productId: id,
-    productName: productInfo.itemName, // ✅ required by backend
+    productName: productInfo.itemName, 
     amount: latestPrice,
     paymentMethod: result.paymentIntent.payment_method_types
   }
@@ -103,7 +103,7 @@ console.log(price);
       icon: 'success',
       confirmButtonText: 'Go to All Products',
     }).then(() => {
-      navigate('/allproducts'); // ✅ Redirect
+      navigate('/allproducts'); 
     });
   }
 }

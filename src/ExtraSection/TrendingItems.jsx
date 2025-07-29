@@ -4,7 +4,7 @@ const TrendingItems = () => {
   const [trending, setTrending] = useState([]);
 
   useEffect(() => {
-    fetch('https://local-market-omega.vercel.app/trending-products') // 🔁 Adjust API path
+    fetch('https://local-market-omega.vercel.app/trending-products') 
       .then(res => res.json())
       .then(data => setTrending(data));
   }, []);

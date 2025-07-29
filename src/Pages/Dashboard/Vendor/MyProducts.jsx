@@ -72,13 +72,13 @@ const MyProducts = () => {
                     className="bg-blue-500 text-white px-3 py-1 rounded"
                     onClick={() => navigate(`/dashboard/update-product/${p._id}`)}
                   >
-                    ✏️ Update
+                     Update
                   </button>
                   <button
                     className="bg-red-500 text-white px-3 py-1 rounded"
                     onClick={() => handleDelete(p._id)}
                   >
-                    ❌ Delete
+                    Delete
                   </button>
                 </td>
               </tr>

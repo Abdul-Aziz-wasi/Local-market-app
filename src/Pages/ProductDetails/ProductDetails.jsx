@@ -158,7 +158,7 @@ const ProductDetails = () => {
       <ReviewSection></ReviewSection>
       <PriceComparisonChart prices={prices}></PriceComparisonChart>
 
-      {/* TODO: Add user reviews/comments section below here */}
+      
     </motion.div>
   );
 };
