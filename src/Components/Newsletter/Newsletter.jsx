@@ -10,7 +10,7 @@ const Newsletter = () => {
       className="w-full bg-gradient-to-r from-green-600 to-emerald-500 py-16 px-4"
     >
       <div className="max-w-4xl mx-auto text-center text-white">
-        {/* Heading */}
+        
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Stay Updated with Market Trends 🛒
         </h2>
@@ -18,19 +18,18 @@ const Newsletter = () => {
           Subscribe to our newsletter and get daily price updates straight to your inbox.
         </p>
 
-        {/* Newsletter Form */}
         <form className="flex flex-col md:flex-row items-center justify-center gap-4">
           <input
             type="email"
             placeholder="Enter your email"
-            className="w-full md:w-2/3 px-4 py-3 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            className="w-full md:w-2/3 px-4 py-3 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
             required
           />
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="bg-yellow-400 text-gray-900 font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-yellow-300 transition"
+            className="bg-teal-700 text-gray-900 font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-teal-600 transition"
           >
             Subscribe
           </motion.button>
