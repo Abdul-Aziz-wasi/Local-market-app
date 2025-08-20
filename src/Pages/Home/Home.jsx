@@ -5,6 +5,7 @@ import AdvertisementCarousel from '../../Components/AdvertisementCarousel/Advert
 import TrendingItems from '../../ExtraSection/TrendingItems';
 import MarketTips from '../../ExtraSection/MarketTips';
 import Review from '../../Components/Review/Review';
+import Newsletter from '../../Components/Newsletter/Newsletter';
 
 
 const productsPromise =fetch('https://local-market-omega.vercel.app/products').then(res=>res.json())
@@ -20,6 +21,7 @@ const Home = () => {
       <TrendingItems></TrendingItems>
       <MarketTips></MarketTips>
       <Review></Review>
+      <Newsletter></Newsletter>
     </div>
   );
 };
