@@ -24,7 +24,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-start">
           <NavLink to="/">
-           <h3 className=' font-bold '><span className='text-2xl text-green-500'>V</span>egist</h3>
+           <h3 className=' font-bold '><span className='text-2xl text-green-500'>VEGIST</span></h3>
           </NavLink>
         </div>
 
@@ -49,6 +49,26 @@ const Navbar = () => {
                 }
               >
                 All products
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/terms"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+              >
+                Terms & conditions
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/privacy"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+              >
+                Privacy policy
               </NavLink>
             </li>
 
