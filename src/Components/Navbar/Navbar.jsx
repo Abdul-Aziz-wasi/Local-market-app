@@ -170,6 +170,30 @@ const Navbar = () => {
                 All Products
               </NavLink>
             </li>
+
+            <li>
+              <NavLink
+                to="/terms"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+              >
+                Terms & conditions
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/privacy"
+                className={({ isActive }) =>
+                  isActive ? 'text-teal-800 font-semibold' : 'hover:text-teal-600'
+                }
+              >
+                Privacy policy
+              </NavLink>
+            </li>
+
+
+            
             <li>
               
             {user && (
